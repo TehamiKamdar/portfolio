@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+:root{
+   --primary-color: #d4af37;
+   --secondary-color: #1f242d;
+}
+
 *{
    margin: 0;
    padding: 0;
@@ -81,7 +86,7 @@ body{
 }
 
 .navbar a:hover{
-   color: #0ef;
+   color: var(--primary-color);
 }
 
 .home{
@@ -108,7 +113,7 @@ body{
 }
 
 .home-content h3 span{
-   color: #0ef;
+   color: var(--primary-color);
 }
 
 .home-content h1{
@@ -127,27 +132,27 @@ body{
    width: 40px;
    height: 40px;
    background: transparent;
-   border: 2px solid #0ef;
+   border: 2px solid var(--primary-color);
    border-radius: 50%;
    font-size: 20px;
-   color: #0ef;
+   color: var(--primary-color);
    text-decoration: none;
    margin: 30px 15px 30px 0px;
    transition:  .5s;
 }
 
 .social-media a:hover{
-   background-color: #0ef;
+   background-color: var(--primary-color);
    color: #1f242d;
-   box-shadow: 0px 0px 20px #0ef;
+   box-shadow: 0px 0px 20px var(--primary-color);
 }
 
 .btn{
    display: inline-block;
    padding: 12px 28px;
-   background: #0ef;
+   background: var(--primary-color);
    border-radius: 40px;
-   box-shadow: 0px 0px 10px #0ef;
+   box-shadow: 0px 0px 10px var(--primary-color);
    font-size: 16px;
    color: #1f242d;
    letter-spacing: 1px;
@@ -159,7 +164,7 @@ hr {
    display: block;
    height: 1px;
    border: 0;
-   border-top: 1px solid #0ef;
+   border-top: 1px solid var(--primary-color);
    margin: 1em 0;
    padding: 0;
 }
@@ -196,10 +201,10 @@ hr {
    width: 60px;
    height: 60px;
    background: transparent;
-   border: 2px solid #0ef;
+   border: 2px solid var(--primary-color);
    border-radius: 50%;
    font-size: 25px;
-   color: #0ef;
+   color: var(--primary-color);
    text-decoration: none;
    margin: 30px 15px 30px 0px;
    transition:  .5s;
@@ -212,18 +217,18 @@ hr {
    width: 60px;
    height: 60px;
    background: transparent;
-   border: 2px solid #0ef;
+   border: 2px solid var(--primary-color);
    border-radius: 50%;
    font-size: 20px;
-   color: #0ef;
+   color: var(--primary-color);
    text-decoration: none;
    margin: 30px 15px 30px 0px;
    transition:  .5s;
 }
 .skills-icon a:hover{
-   background-color: #0ef;
+   background-color: var(--primary-color);
    color: #1f242d;
-   box-shadow: 0px 0px 20px #0ef;
+   box-shadow: 0px 0px 20px var(--primary-color);
 }
 svg { 
    width: 30px; 
