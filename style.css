@@ -232,3 +232,17 @@ svg {
 a:hover svg path{
    fill: #1f242d;
 }
+
+.work-in-progress{
+   position: relative;
+   width: 100%;
+   display: block;
+   padding: 70px 10% 0;
+}
+
+.work-in-progress h1{
+   display: block;
+   text-align: center;
+   font-size: 56px;
+   font-weight: 700;
+}
