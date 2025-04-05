@@ -259,19 +259,6 @@ a:hover svg path{
    justify-content: space-between;
 }
 
-.work-in-progress{
-   position: relative;
-   width: 100%;
-   display: block;
-   padding: 70px 10% 0;
-}
-
-.work-in-progress h1{
-   display: block;
-   text-align: center;
-   font-size: 56px;
-   font-weight: 700;
-}
 
 .project-details{
    padding: 20px;
@@ -293,3 +280,109 @@ a:hover svg path{
    width: 100%;
 }
 
+.contact{
+   position: relative;
+   width: 100%;
+   display: block;
+   padding: 70px 10% 0;
+}
+
+.contact h1{
+   display: block;
+   text-align: center;
+   font-size: 56px;
+   font-weight: 700;
+}
+
+
+.contact-section{
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   width: 100%;
+   margin-top: 50px;
+}
+
+.icon-contact{
+   width: 50%;
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: column;
+}
+
+.icon-contact a i{
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   width: 60px;
+   height: 60px;
+   background: transparent;
+   border: 2px solid var(--primary-color);
+   border-radius: 50%;
+   font-size: 25px;
+   color: var(--primary-color);
+   text-decoration: none;
+   margin: 30px 15px 30px 0px;
+   transition:  .5s;
+}
+
+.icon-contact a span{
+   font-size: 24px;
+   color: #fff;
+   font-weight: 700;
+}
+
+
+.form{
+   width: 50%;
+}
+
+.form input{
+   position: relative;
+   padding: 10px;
+   font-size: 18px;
+   top: 0;
+   left: 0;
+   width: 80%;
+   height: 50px;
+   background: transparent;
+   border: 2px solid var(--primary-color);
+   border-radius: 10px;
+   margin: 10px 20px;
+}
+
+.form textarea{
+   position: relative;
+   padding: 10px;
+   font-size: 18px;
+   top: 0;
+   left: 0;
+   width: 80%;
+   background: transparent;
+   border: 2px solid var(--primary-color);
+   border-radius: 10px;
+   margin: 10px 20px;
+}
+
+.form a{
+   margin: 15px;
+}
+
+
+
+
+
+
+.work-in-progress{
+   position: relative;
+   width: 100%;
+   display: block;
+   padding: 70px 10% 0;
+}
+
+.work-in-progress h1{
+   display: block;
+   text-align: center;
+   font-size: 56px;
+   font-weight: 700;
+}
