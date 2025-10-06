@@ -44,6 +44,11 @@ h6 {
   border-radius: 6px;
 }
 
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Navbar */
 .navbar {
   background-color: rgba(5, 5, 21, 0.95);
@@ -233,6 +238,12 @@ h6 {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(194, 155, 0, 0.5);
   color: var(--light-color);
+}
+
+.name-text:hover{
+  color: var(--primary-color);
+  text-decoration: underline;
+  transition: all 0.5s ease;
 }
 
 /* Floating elements */
