@@ -208,41 +208,192 @@
         </div>
     </section>
 
+    
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="container">
             <h2 class="section-title">Featured Work</h2>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="portfolio-item">
-                        <img src="https://placehold.co/400x280/050515/c29b00?text=Luxury+Brand" alt="Project 1" class="portfolio-img">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">Luxury Fashion E-commerce</h3>
-                            <p>Complete redesign of high-end fashion retailer's online presence</p>
+            
+            <!-- Portfolio Filters -->
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="web">Web Design</button>
+                <button class="filter-btn" data-filter="app">Mobile Apps</button>
+                <button class="filter-btn" data-filter="branding">Branding</button>
+                <button class="filter-btn" data-filter="uiux">UI/UX</button>
+            </div>
+            
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid">
+                <div class="row">
+                    <!-- Project 1 -->
+                    <div class="col-lg-4 col-md-6" data-category="web, uiux">
+                        <div class="portfolio-item animate-in">
+                            <img src="https://placehold.co/400x320/050515/c29b00?text=Luxury+Brand" alt="Luxury Fashion E-commerce" class="portfolio-img">
+                            <div class="portfolio-overlay">
+                                <h3 class="portfolio-title">Luxury Fashion E-commerce</h3>
+                                <p class="portfolio-description">Complete redesign of high-end fashion retailer's online presence with enhanced user experience</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">Web Design</span>
+                                    <span class="portfolio-tag">E-commerce</span>
+                                    <span class="portfolio-tag">UI/UX</span>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <a href="#" class="portfolio-btn primary">
+                                        <i class="ri-external-link-line"></i> Live Demo
+                                    </a>
+                                    <a href="#" class="portfolio-btn">
+                                        <i class="ri-github-fill"></i> Details
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="portfolio-item">
-                        <img src="https://placehold.co/400x280/050515/c29b00?text=Fintech+App" alt="Project 2" class="portfolio-img">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">Fintech Mobile Application</h3>
-                            <p>Investment platform with advanced analytics and security</p>
+                    
+                    <!-- Project 2 -->
+                    <div class="col-lg-4 col-md-6" data-category="app, uiux">
+                        <div class="portfolio-item animate-in">
+                            <img src="https://placehold.co/400x320/050515/c29b00?text=Fintech+App" alt="Fintech Mobile Application" class="portfolio-img">
+                            <div class="portfolio-overlay">
+                                <h3 class="portfolio-title">Fintech Mobile Application</h3>
+                                <p class="portfolio-description">Investment platform with advanced analytics, security features, and intuitive user interface</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">Mobile App</span>
+                                    <span class="portfolio-tag">Fintech</span>
+                                    <span class="portfolio-tag">UI/UX</span>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <a href="#" class="portfolio-btn primary">
+                                        <i class="ri-external-link-line"></i> View App
+                                    </a>
+                                    <a href="#" class="portfolio-btn">
+                                        <i class="ri-github-fill"></i> Case Study
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="portfolio-item">
-                        <img src="https://placehold.co/400x280/050515/c29b00?text=Travel+Platform" alt="Project 3" class="portfolio-img">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">Luxury Travel Platform</h3>
-                            <p>Booking experience for exclusive travel destinations</p>
+                    
+                    <!-- Project 3 -->
+                    <div class="col-lg-4 col-md-6" data-category="web, branding">
+                        <div class="portfolio-item animate-in">
+                            <img src="https://placehold.co/400x320/050515/c29b00?text=Travel+Platform" alt="Luxury Travel Platform" class="portfolio-img">
+                            <div class="portfolio-overlay">
+                                <h3 class="portfolio-title">Luxury Travel Platform</h3>
+                                <p class="portfolio-description">Booking experience for exclusive travel destinations with immersive visual storytelling</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">Web Design</span>
+                                    <span class="portfolio-tag">Branding</span>
+                                    <span class="portfolio-tag">Travel</span>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <a href="#" class="portfolio-btn primary">
+                                        <i class="ri-external-link-line"></i> Visit Site
+                                    </a>
+                                    <a href="#" class="portfolio-btn">
+                                        <i class="ri-github-fill"></i> Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="col-lg-4 col-md-6" data-category="branding, uiux">
+                        <div class="portfolio-item animate-in">
+                            <img src="https://placehold.co/400x320/050515/c29b00?text=Restaurant+Branding" alt="Gourmet Restaurant Branding" class="portfolio-img">
+                            <div class="portfolio-overlay">
+                                <h3 class="portfolio-title">Gourmet Restaurant Branding</h3>
+                                <p class="portfolio-description">Complete visual identity and digital presence for Michelin-star restaurant concept</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">Branding</span>
+                                    <span class="portfolio-tag">UI/UX</span>
+                                    <span class="portfolio-tag">Restaurant</span>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <a href="#" class="portfolio-btn primary">
+                                        <i class="ri-external-link-line"></i> View Project
+                                    </a>
+                                    <a href="#" class="portfolio-btn">
+                                        <i class="ri-github-fill"></i> Case Study
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 5 -->
+                    <div class="col-lg-4 col-md-6" data-category="web, app">
+                        <div class="portfolio-item animate-in">
+                            <img src="https://placehold.co/400x320/050515/c29b00?text=Health+App" alt="Health & Wellness App" class="portfolio-img">
+                            <div class="portfolio-overlay">
+                                <h3 class="portfolio-title">Health & Wellness App</h3>
+                                <p class="portfolio-description">Comprehensive fitness and nutrition tracking application with personalized recommendations</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">Mobile App</span>
+                                    <span class="portfolio-tag">Web Design</span>
+                                    <span class="portfolio-tag">Health</span>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <a href="#" class="portfolio-btn primary">
+                                        <i class="ri-external-link-line"></i> Try Demo
+                                    </a>
+                                    <a href="#" class="portfolio-btn">
+                                        <i class="ri-github-fill"></i> Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 6 -->
+                    <div class="col-lg-4 col-md-6" data-category="uiux, branding">
+                        <div class="portfolio-item animate-in">
+                            <img src="https://placehold.co/400x320/050515/c29b00?text=Tech+Startup" alt="SaaS Platform Dashboard" class="portfolio-img">
+                            <div class="portfolio-overlay">
+                                <h3 class="portfolio-title">SaaS Platform Dashboard</h3>
+                                <p class="portfolio-description">Complex data visualization and analytics dashboard for enterprise SaaS platform</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">UI/UX</span>
+                                    <span class="portfolio-tag">Branding</span>
+                                    <span class="portfolio-tag">SaaS</span>
+                                </div>
+                                <div class="portfolio-actions">
+                                    <a href="#" class="portfolio-btn primary">
+                                        <i class="ri-external-link-line"></i> Live Demo
+                                    </a>
+                                    <a href="#" class="portfolio-btn">
+                                        <i class="ri-github-fill"></i> Case Study
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Portfolio Stats -->
+            <div class="portfolio-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">35+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Awards Won</div>
+                </div>
+            </div>
         </div>
     </section>
+
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
