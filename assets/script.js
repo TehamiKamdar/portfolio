@@ -41,7 +41,6 @@ $(document).ready(function () {
     loop: true,
     margin: 20,
     nav: true,
-    dots: true,
     autoplay: true,
     autoplayTimeout: 2000,
     autoplayHoverPause: true,
