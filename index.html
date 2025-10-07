@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lavish Portfolio | Premium Design</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Remix Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <title>Tehami Kamdar</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="assets/lib/bootstrap/bootstrap.min.css">
+    <!-- Remix Icons -->
+    <link rel="stylesheet" href="assets/lib/remixicons/remixicon.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="assets/lib/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/lib/owlcarousel/owl.theme.default.min.css">
+    <!-- Tabler Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.css">
     <!-- Custom Styles -->
     <link rel="stylesheet" href="assets/style.css">
-    <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.css">
 </head>
 
 <body>
@@ -537,20 +537,16 @@
             <!-- Portfolio Stats -->
             <div class="portfolio-stats">
                 <div class="stat-item">
-                    <div class="stat-number">50+</div>
+                    <div class="stat-number">20+</div>
                     <div class="stat-label">Projects Completed</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">35+</div>
-                    <div class="stat-label">Happy Clients</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5+</div>
+                    <div class="stat-number">3+</div>
                     <div class="stat-label">Years Experience</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">12</div>
-                    <div class="stat-label">Awards Won</div>
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Happy Clients</div>
                 </div>
             </div>
         </div>
@@ -571,7 +567,7 @@
                     <div class="contact-info text-center">
                         <i class="ri-mail-line contact-icon"></i>
                         <h4>Email</h4>
-                        <p>hello@tehamikamdar.com</p>
+                        <a href="mailto:tehamikamdar15@gmail.com">Click Here</a>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -633,7 +629,7 @@
                 <div class="footer-column">
                     <h4>Connect</h4>
                     <ul>
-                        <li><a href="mailto:hello@tehamikamdar.com">hello@tehamikamdar.com</a></li>
+                        <li><a href="mailto:tehamikamdar15@gmail.com">Email Me</a></li>
                         <li><a href="tel:+92 333 0247545">+92 333 0247545</a></li>
                     </ul>
                 </div>
@@ -654,7 +650,7 @@
                         <i class="ri-facebook-fill"></i>
                     </a>
                     <a href="#" title="Behance">
-                        <i class="ri-upwork-fill"></i>
+                        <i class="ti ti-brand-upwork"></i>
                     </a>
                     <a href="#" title="LinkedIn">
                         <i class="ri-linkedin-fill"></i>
@@ -673,111 +669,17 @@
                 </div>
             </div>
         </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Particles.js -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Custom Script -->
-    <script src="assets/script.js"></script>
-
+    </footer>    
 </body>
+</html>
 
-</html><!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Owl Carousel JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    
-    <script>
-        // Initialize Owl Carousel
-        $(document).ready(function(){
-            $(".owl-carousel").owlCarousel({
-                loop: true,
-                margin: 20,
-                nav: true,
-                dots: true,
-                autoplay:true,
-                autoplayTimeout: 2000,
-                autoplayHoverPause: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    768: {
-                        items: 2
-                    },
-                    992: {
-                        items: 3
-                    },
-                    1200: {
-                        items: 4
-                    }
-                },
-                navText: [
-                    '<i class="ri-arrow-left-s-line"></i>',
-                    '<i class="ri-arrow-right-s-line"></i>'
-                ]
-            });
-            
-            // Initialize skill animations
-            initializeSkillAnimations();
-            
-            // Initialize category filtering
-            initializeCategoryFiltering();
-        });
-
-        // Skill animations
-        function initializeSkillAnimations() {
-            const skillProgresses = document.querySelectorAll('.skill-progress');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const progressBar = entry.target;
-                        const width = progressBar.getAttribute('data-width');
-                        
-                        setTimeout(() => {
-                            progressBar.style.width = width;
-                        }, 300);
-                        
-                        observer.unobserve(progressBar);
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            skillProgresses.forEach(progress => {
-                observer.observe(progress);
-            });
-        }
-
-        // Category filtering
-        function initializeCategoryFiltering() {
-            const categoryButtons = document.querySelectorAll('.category-btn');
-            const skillItems = document.querySelectorAll('.skill-item');
-            
-            categoryButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Update active button
-                    categoryButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const category = this.getAttribute('data-category');
-                    
-                    // Filter skill items
-                    skillItems.forEach(item => {
-                        const itemCategory = item.getAttribute('data-category');
-                        
-                        if (category === 'all' || category === itemCategory) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                    
-                    // Refresh Owl Carousel
-                    $('.owl-carousel').trigger('refresh.owl.carousel');
-                });
-            });
-        }
-    </script>
+<!-- jQuery -->
+<script src="assets/lib/jquery/jquery-3.7.1.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="assets/lib.bootstrap/bootstrap.bundle.min.js"></script>
+<!-- Particles.js -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<!-- Custom Script -->
+<script src="assets/script.js"></script>
+<!-- Owl Carousel JS -->
+<script src="assets/lib/owlcarousel/owl.carousel.min.js"></script>    
