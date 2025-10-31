@@ -1617,6 +1617,15 @@ a {
     padding: 20px 15px;
   }
 
+  .profile-avatar{
+    height: 90px;
+    width: 90px;
+  }
+
+  .profile-avatar-inner{
+    font-size: 2rem;
+  }
+
   .skill-icon {
     width: 60px;
     height: 60px;
