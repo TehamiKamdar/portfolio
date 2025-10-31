@@ -96,26 +96,39 @@ $(function () {
 });
 
 /* ===== GitHub Portfolio ===== */
+const username = "TehamiKamdar";
+const token = "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"
+const container = document.getElementById("projects");
+
 const humanize = s => s.replace(/[_-]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 const topLangs = langs => Object.keys(langs).sort((a, b) => langs[b] - langs[a]);
 
 async function fetchRepos() {
-  // 🧠 Call your backend API instead of GitHub directly
-  const res = await fetch("/api/github");
-  const all = await res.json();
+  let all = [], page = 1, perPage = 100;
+  while (true) {
+    const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=${perPage}&page=${page}`);
+    const data = await res.json();
+    if (!data.length) break;
+    all = all.concat(data);
+    page++;
+  }
 
-  // Filter repos that have 'portfolio' in topics
-  const repos = all.filter(r => r.topics?.includes("portfolio"));
+  const repos = [];
+  for (const r of all) {
+    const t = await (await fetch(r.url + "/topics", { headers: { Accept: "application/vnd.github.mercy-preview+json","Authorization": `token ${token}` } })).json();
+    if (t.names?.includes("portfolio")) {
+      const langs = await (await fetch(r.languages_url)).json();
+      repos.push({ ...r, topics: t.names, languages: langs });
+    }
+  }
 
-  // Split featured and normal
   const featured = repos.filter(r => r.topics.includes("featured"));
   const normal = repos.filter(r => !r.topics.includes("featured"));
   const ordered = [featured[0], ...normal.slice(0, 5), featured[1], ...normal.slice(5)].filter(Boolean);
 
   container.innerHTML = "";
   ordered.forEach(r => {
-    const langs = Object.keys(r.languages || {}).map(l => `<span class="tech-tag">${l}</span>`).join("") || "<span class='tech-tag'>N/A</span>";
-
+    const langs = topLangs(r.languages).map(l => `<span class="tech-tag">${l}</span>`).join("") || "<span class='tech-tag'>N/A</span>";
     container.innerHTML += `
       <div class="project-card ${r.topics.includes("featured") ? "featured" : ""}">
         <div class="project-image">
@@ -134,5 +147,4 @@ async function fetchRepos() {
       </div>`;
   });
 }
-
 fetchRepos();
