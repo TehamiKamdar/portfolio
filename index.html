@@ -548,14 +548,13 @@
     }
 
     // 🧠 Helper: Display error message on page
-    function showError(message, errorData = null) {
-        console.error("❌ Error:", message, errorData || "");
+    function showErrorMessage(msg) {
         container.innerHTML = `
-    <div style="color: red; text-shadow: none; background: #ffe6e6; padding: 10px; border-radius: 6px;">
-      ⚠️ <strong>Error:</strong> ${message}
-      ${errorData && errorData.message ? `<br><small>${errorData.message}</small>` : ""}
+    <div style="color:red; text-shadow:none; background:#ffe6e6; padding:10px; border-radius:6px;">
+      ⚠️ ${msg}
     </div>
   `;
+        console.error("❌ GitHub API Error:", msg);
     }
 
     async function fetchPortfolioRepos() {
@@ -563,8 +562,9 @@
             const res = await fetch("/api/github");
             const allRepos = await res.json();
 
-            if (!Array.isArray(allRepos)) {
-                return showError("GitHub API error while fetching repositories.", allRepos);
+            // ⚠️ If API returns error (like "Bad credentials" etc.)
+            if (!res.ok) {
+                return showErrorMessage(allRepos.message || "Unknown API error occurred.");
             }
 
             const headers = { "Accept": "application/vnd.github.mercy-preview+json" };
@@ -575,15 +575,23 @@
                 const topicsData = await topicsRes.json();
                 const topics = topicsData.names || [];
 
+                if (!topicsRes.ok) {
+                    return showErrorMessage(topicsData.message || `Error fetching topics for ${repo.name}`);
+                }
+
                 if (topics.includes("portfolio")) {
                     const langRes = await fetch(repo.languages_url, { headers });
                     const languages = await langRes.json();
                     portfolioRepos.push({ ...repo, topics, languages });
                 }
+
+                if (!langRes.ok) {
+                    return showErrorMessage(languages.message || `Error fetching languages for ${repo.name}`);
+                }
             }
 
             if (portfolioRepos.length === 0) {
-                return showError("No portfolio repositories found. Make sure your repos have the 'portfolio' topic.");
+                return showErrorMessage("No repositories found with the 'portfolio' topic.");
             }
 
             const featured = portfolioRepos.filter(r => r.topics.includes("featured"));
@@ -621,7 +629,7 @@
                 container.appendChild(card);
             });
         } catch (err) {
-            showError("Unexpected error occurred while loading portfolio.", err);
+            showErrorMessage(error.message || "Unexpected error occurred.");
         }
     }
 
