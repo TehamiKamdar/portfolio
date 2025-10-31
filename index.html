@@ -440,7 +440,8 @@
                                 </div>
                             </div>
                             <input type="text" name="subject" class="form-control" placeholder="Subject">
-                            <textarea class="form-control" name="message" rows="5" placeholder="Your Message"></textarea>
+                            <textarea class="form-control" name="message" rows="5"
+                                placeholder="Your Message"></textarea>
                             <button type="submit" class="btn btn-primary-custom">Send Message</button>
                         </form>
                     </div>
@@ -535,61 +536,75 @@
 <script src="assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
 <script>
-const username = "TehamiKamdar";
-const container = document.getElementById("projects");
+    const username = "TehamiKamdar";
+    const container = document.getElementById("projects");
 
-function humanizeRepoName(name) {
-  return name.replace(/[_-]+/g, " ").trim().toLowerCase().replace(/\b[a-z]/g, ch => ch.toUpperCase());
-}
-
-function getTopLanguages(languages) {
-  return Object.keys(languages).sort((a, b) => languages[b] - languages[a]);
-}
-
-async function fetchPortfolioRepos() {
-  const res = await fetch("/api/github");
-  const allRepos = await res.json();
-
-  if (!Array.isArray(allRepos)) {
-    console.error("❌ GitHub API Error:", allRepos);
-    container.innerHTML = `<p style="color:red; text-shadow:none;">GitHub API error: ${allRepos.message || "Unknown error"}</p>`;
-    return;
-  }
-
-  const headers = { "Accept": "application/vnd.github.mercy-preview+json" };
-  const portfolioRepos = [];
-
-  for (const repo of allRepos) {
-    const topicsRes = await fetch(`${repo.url}/topics`, { headers });
-    const topicsData = await topicsRes.json();
-    const topics = topicsData.names || [];
-
-    if (topics.includes("portfolio")) {
-      const langRes = await fetch(repo.languages_url, { headers });
-      const languages = await langRes.json();
-      portfolioRepos.push({ ...repo, topics, languages });
+    function humanizeRepoName(name) {
+        return name.replace(/[_-]+/g, " ").trim().toLowerCase().replace(/\b[a-z]/g, ch => ch.toUpperCase());
     }
-  }
 
-  const featured = portfolioRepos.filter(r => r.topics.includes("featured"));
-  const normal = portfolioRepos.filter(r => !r.topics.includes("featured"));
+    function getTopLanguages(languages) {
+        return Object.keys(languages).sort((a, b) => languages[b] - languages[a]);
+    }
 
-  const ordered = [];
-  if (featured[0]) ordered.push(featured[0]);
-  ordered.push(...normal.slice(0, 5));
-  if (featured[1]) ordered.push(featured[1]);
-  ordered.push(...normal.slice(5));
+    // 🧠 Helper: Display error message on page
+    function showError(message, errorData = null) {
+        console.error("❌ Error:", message, errorData || "");
+        container.innerHTML = `
+    <div style="color: red; text-shadow: none; background: #ffe6e6; padding: 10px; border-radius: 6px;">
+      ⚠️ <strong>Error:</strong> ${message}
+      ${errorData && errorData.message ? `<br><small>${errorData.message}</small>` : ""}
+    </div>
+  `;
+    }
 
-  container.innerHTML = "";
+    async function fetchPortfolioRepos() {
+        try {
+            const res = await fetch("/api/github");
+            const allRepos = await res.json();
 
-  ordered.forEach(repo => {
-    const isFeatured = repo.topics.includes("featured");
-    const topLangs = getTopLanguages(repo.languages);
-    const techTags = topLangs.map(lang => `<span class="tech-tag">${lang}</span>`).join("");
+            if (!Array.isArray(allRepos)) {
+                return showError("GitHub API error while fetching repositories.", allRepos);
+            }
 
-    const card = document.createElement("div");
-    card.className = `project-card ${isFeatured ? "featured" : ""}`;
-    card.innerHTML = `
+            const headers = { "Accept": "application/vnd.github.mercy-preview+json" };
+            const portfolioRepos = [];
+
+            for (const repo of allRepos) {
+                const topicsRes = await fetch(`${repo.url}/topics`, { headers });
+                const topicsData = await topicsRes.json();
+                const topics = topicsData.names || [];
+
+                if (topics.includes("portfolio")) {
+                    const langRes = await fetch(repo.languages_url, { headers });
+                    const languages = await langRes.json();
+                    portfolioRepos.push({ ...repo, topics, languages });
+                }
+            }
+
+            if (portfolioRepos.length === 0) {
+                return showError("No portfolio repositories found. Make sure your repos have the 'portfolio' topic.");
+            }
+
+            const featured = portfolioRepos.filter(r => r.topics.includes("featured"));
+            const normal = portfolioRepos.filter(r => !r.topics.includes("featured"));
+
+            const ordered = [];
+            if (featured[0]) ordered.push(featured[0]);
+            ordered.push(...normal.slice(0, 5));
+            if (featured[1]) ordered.push(featured[1]);
+            ordered.push(...normal.slice(5));
+
+            container.innerHTML = "";
+
+            ordered.forEach(repo => {
+                const isFeatured = repo.topics.includes("featured");
+                const topLangs = getTopLanguages(repo.languages);
+                const techTags = topLangs.map(lang => `<span class="tech-tag">${lang}</span>`).join("");
+
+                const card = document.createElement("div");
+                card.className = `project-card ${isFeatured ? "featured" : ""}`;
+                card.innerHTML = `
       <div class="project-image">
         <div class="project-badge">${repo.topics[0] || "Project"}</div>
         <div class="project-overlay"></div>
@@ -603,9 +618,12 @@ async function fetchPortfolioRepos() {
           <a href="${repo.html_url}" target="_blank" class="project-link secondary"><i class="ri-github-fill"></i> Source Code</a>
         </div>
       </div>`;
-    container.appendChild(card);
-  });
-}
+                container.appendChild(card);
+            });
+        } catch (err) {
+            showError("Unexpected error occurred while loading portfolio.", err);
+        }
+    }
 
-fetchPortfolioRepos();
+    fetchPortfolioRepos();
 </script>
