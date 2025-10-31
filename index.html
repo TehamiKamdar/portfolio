@@ -550,12 +550,22 @@
     // 🧠 Helper: Display error message on page
     function showErrorMessage(msg) {
         container.innerHTML = `
-    <div style="color:red; text-shadow:none; background:#ffe6e6; padding:10px; border-radius:6px;">
-      ⚠️ ${msg}
+    <div style="
+      color: red; 
+      text-shadow: none; 
+      background: #ffe6e6; 
+      padding: 10px 14px; 
+      border-radius: 8px; 
+      line-height: 1.5; 
+      font-family: system-ui, sans-serif;
+    ">
+      ⚠️ ${msg}<br>
+      <small style="color:#333;">If you see this error, let us know and we'll fix it soon.</small>
     </div>
   `;
         console.error("❌ GitHub API Error:", msg);
     }
+
 
     async function fetchPortfolioRepos() {
         try {
