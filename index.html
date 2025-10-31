@@ -449,22 +449,9 @@
                             <button type="submit" class="btn btn-primary-custom">Send Message</button>
                         </form>
                     </div>
-
-                    <!-- Hidden Success Message -->
-                    <div id="successMessage" style="display:none; margin-top:15px; color:green; font-weight:600;">
-                        ✅ Thank you! Your message has been sent successfully.
-                    </div>
-
-                    <!-- Hidden Error Message -->
-                    <div id="errorMessage" style="display:none; margin-top:15px; color:red; font-weight:600;">
-                        ❌ Oops! Something went wrong. Please try again.
-                    </div>
-
                 </div>
             </div>
         </div>
-
-
     </section>
 
     <!-- Enhanced Footer -->
@@ -505,27 +492,36 @@
                 <div class="footer-column">
                     <h4>Connect</h4>
                     <ul>
-                        <li><a href="mailto:tehamikamdar19@gmail.com">tehamikamdar19@gmail.com</a></li>
+                        <li><a href="mailto:tehamikamdar15@gmail.com">Tehami Kamdar</a></li>
                         <li><a href="tel:+92 333 0247545">+92 333 0247545</a></li>
                     </ul>
                 </div>
             </div>
 
+            <div class="footer-newsletter">
+                <h4>Stay Updated</h4>
+                <p>Subscribe to my newsletter for the latest projects and insights</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+
             <div class="footer-bottom">
                 <div class="social-links">
-                    <a href="https://www.facebook.com/tehamikamdartk/" title="Facebook">
+                    <a href="#" title="Dribbble">
                         <i class="ri-facebook-fill"></i>
                     </a>
-                    <a href="https://www.upwork.com/freelancers/~01962750b41086e5e0" title="Upwork">
+                    <a href="#" title="Behance">
                         <i class="ti ti-brand-upwork"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/tehami-kamdar-69a87b217/" title="LinkedIn">
+                    <a href="#" title="LinkedIn">
                         <i class="ri-linkedin-fill"></i>
                     </a>
-                    <a href="https://www.instagram.com/t.e.h.a.m.i/" title="Instagram">
+                    <a href="#" title="Instagram">
                         <i class="ri-instagram-line"></i>
                     </a>
-                    <a href="https://x.com/kamdar_tehami1" title="Twitter">
+                    <a href="#" title="Twitter">
                         <i class="ri-twitter-fill"></i>
                     </a>
                 </div>
@@ -551,3 +547,79 @@
 <script src="assets/script.js"></script>
 <!-- Owl Carousel JS -->
 <script src="assets/lib/owlcarousel/owl.carousel.min.js"></script>
+
+<script>
+const username = "TehamiKamdar";
+const container = document.getElementById("projects");
+
+function humanizeRepoName(name) {
+  return name.replace(/[_-]+/g, " ").trim().toLowerCase().replace(/\b[a-z]/g, ch => ch.toUpperCase());
+}
+
+function getTopLanguages(languages) {
+  return Object.keys(languages).sort((a, b) => languages[b] - languages[a]);
+}
+
+async function fetchPortfolioRepos() {
+  const res = await fetch("/api/github");
+  const allRepos = await res.json();
+
+  if (!Array.isArray(allRepos)) {
+    console.error("❌ GitHub API Error:", allRepos);
+    container.innerHTML = `<p style="color:red; text-shadow:none;">GitHub API error: ${allRepos.message || "Unknown error"}</p>`;
+    return;
+  }
+
+  const headers = { "Accept": "application/vnd.github.mercy-preview+json" };
+  const portfolioRepos = [];
+
+  for (const repo of allRepos) {
+    const topicsRes = await fetch(`${repo.url}/topics`, { headers });
+    const topicsData = await topicsRes.json();
+    const topics = topicsData.names || [];
+
+    if (topics.includes("portfolio")) {
+      const langRes = await fetch(repo.languages_url, { headers });
+      const languages = await langRes.json();
+      portfolioRepos.push({ ...repo, topics, languages });
+    }
+  }
+
+  const featured = portfolioRepos.filter(r => r.topics.includes("featured"));
+  const normal = portfolioRepos.filter(r => !r.topics.includes("featured"));
+
+  const ordered = [];
+  if (featured[0]) ordered.push(featured[0]);
+  ordered.push(...normal.slice(0, 5));
+  if (featured[1]) ordered.push(featured[1]);
+  ordered.push(...normal.slice(5));
+
+  container.innerHTML = "";
+
+  ordered.forEach(repo => {
+    const isFeatured = repo.topics.includes("featured");
+    const topLangs = getTopLanguages(repo.languages);
+    const techTags = topLangs.map(lang => `<span class="tech-tag">${lang}</span>`).join("");
+
+    const card = document.createElement("div");
+    card.className = `project-card ${isFeatured ? "featured" : ""}`;
+    card.innerHTML = `
+      <div class="project-image">
+        <div class="project-badge">${repo.topics[0] || "Project"}</div>
+        <div class="project-overlay"></div>
+      </div>
+      <div class="project-content">
+        <h3 class="project-title">${humanizeRepoName(repo.name)}</h3>
+        <p class="project-description">${repo.description || "No description provided."}</p>
+        <div class="project-tech">${techTags || "<span class='tech-tag'>N/A</span>"}</div>
+        <div class="project-links">
+          ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="project-link primary"><i class="ri-external-link-line"></i> Live Demo</a>` : ""}
+          <a href="${repo.html_url}" target="_blank" class="project-link secondary"><i class="ri-github-fill"></i> Source Code</a>
+        </div>
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+fetchPortfolioRepos();
+</script>
