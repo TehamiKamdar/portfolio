@@ -568,39 +568,17 @@
 
 
     async function fetchPortfolioRepos() {
-        const apiURL = window.location.hostname.includes("vercel.app")
-  ? "/api/github"
-  : `https://api.github.com/users/${username}/repos`;
-
-        // 💡 Show message if projects not loaded within 10s
-        let repoLoadTimeout = setTimeout(() => {
-            if (!container.innerHTML.trim()) {
-                showErrorMessage(`
-        Projects failed to load.  
-        <br><br>
-        ⚠️ If you're viewing this on GitHub Pages, API access might be restricted.  
-        <br>
-        👉 Try the live version here: 
-        <a href="https://your-vercel-site.vercel.app" target="_blank" style="color:#007bff;text-decoration:underline;">
-          View on Vercel
-        </a>
-      `);
-            }
-        }, 10000);
-
         try {
-            const res = await fetch(apiURL);
+            const res = await fetch("/api/github");
             const allRepos = await res.json();
 
             // ⚠️ Check API validity first
             if (!res.ok) {
-                clearTimeout(repoLoadTimeout);
                 return showErrorMessage(allRepos.message || "Unknown API error occurred.");
             }
 
             // ✅ Ensure it's an array
             if (!Array.isArray(allRepos)) {
-                clearTimeout(repoLoadTimeout);
                 return showErrorMessage("Unexpected API response. Repositories list not found.");
             }
 
@@ -611,7 +589,6 @@
                 const topicsRes = await fetch(`${repo.url}/topics`, { headers });
                 const topicsData = await topicsRes.json();
                 if (!topicsRes.ok) {
-                    clearTimeout(repoLoadTimeout);
                     return showErrorMessage(topicsData.message || `Error fetching topics for ${repo.name}`);
                 }
 
@@ -621,7 +598,6 @@
                     const langRes = await fetch(repo.languages_url, { headers });
                     const languages = await langRes.json();
                     if (!langRes.ok) {
-                        clearTimeout(repoLoadTimeout);
                         return showErrorMessage(languages.message || `Error fetching languages for ${repo.name}`);
                     }
                     portfolioRepos.push({ ...repo, topics, languages });
@@ -629,7 +605,6 @@
             }
 
             if (portfolioRepos.length === 0) {
-                clearTimeout(repoLoadTimeout);
                 return showErrorMessage("No repositories found with the 'portfolio' topic.");
             }
 
@@ -668,11 +643,7 @@
                 container.appendChild(card);
             });
 
-            // ✅ Rendered successfully — stop timeout
-            clearTimeout(repoLoadTimeout);
-
         } catch (err) {
-            clearTimeout(repoLoadTimeout);
             showErrorMessage(err.message || "Unexpected error occurred.");
         }
     }
