@@ -569,7 +569,7 @@
 
     async function fetchPortfolioRepos() {
         try {
-            const res = await fetch("/api/github");
+            const res = await fetch("https://tehamikamdar.vercel.app/api/github");
             const allRepos = await res.json();
 
             // ⚠️ Check API validity first
