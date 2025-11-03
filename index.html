@@ -568,6 +568,10 @@
 
 
     async function fetchPortfolioRepos() {
+        const apiURL = window.location.hostname.includes("vercel.app")
+  ? "/api/github"
+  : `https://api.github.com/users/${username}/repos`;
+
         // 💡 Show message if projects not loaded within 10s
         let repoLoadTimeout = setTimeout(() => {
             if (!container.innerHTML.trim()) {
@@ -585,7 +589,7 @@
         }, 10000);
 
         try {
-            const res = await fetch("/api/github");
+            const res = await fetch(apiURL);
             const allRepos = await res.json();
 
             // ⚠️ Check API validity first
