@@ -639,7 +639,7 @@
                 container.appendChild(card);
             });
         } catch (err) {
-            showErrorMessage(error.message || "Unexpected error occurred.");
+            showErrorMessage(err.message || "Unexpected error occurred.");
         }
     }
 
