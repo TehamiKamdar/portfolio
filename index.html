@@ -568,6 +568,22 @@
 
 
     async function fetchPortfolioRepos() {
+        // 💡 Show message if projects not loaded within 10s
+        let repoLoadTimeout = setTimeout(() => {
+            if (!container.innerHTML.trim()) {
+                showErrorMessage(`
+      Projects failed to load.  
+      <br><br>
+      ⚠️ If you're viewing this on GitHub Pages, API access might be restricted.  
+      <br>
+      👉 Try the live version here: 
+      <a href="https://your-vercel-site.vercel.app" target="_blank" style="color:#007bff;text-decoration:underline;">
+        View on Vercel
+      </a>
+    `);
+            }
+        }, 10000);
+
         try {
             const res = await fetch("/api/github");
             const allRepos = await res.json();
@@ -642,6 +658,9 @@
         </div>`;
                 container.appendChild(card);
             });
+            // ✅ Rendered successfully — stop timeout
+            clearTimeout(repoLoadTimeout);
+
         } catch (err) {
             showErrorMessage(err.message || "Unexpected error occurred.");
         }
